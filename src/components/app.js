@@ -13,8 +13,6 @@ class App extends Component {
         <Route path="/signin" component={SignIn} />
         <Route path="/feature" component={Feature} />
       </div>
-
-
     )
   }
 }

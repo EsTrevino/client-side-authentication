@@ -3,11 +3,6 @@ import history from '../history';
 import {AUTH_USER} from './types';
 const ROOT_URL = 'http://localhost:3090';
 
-
-
-
-
-
 export function signInUser({email, password}){
   return function(dispatch){
     //submit email password to server
