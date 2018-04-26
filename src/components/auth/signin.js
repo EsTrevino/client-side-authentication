@@ -7,13 +7,24 @@ import '../../style/signin.css';
 
 class SignIn extends Component{
 
+  renderAlert(){
+    if(this.props.errorMessage){
+      return(
+        <div className="alert alert-danger error-message">
+          <strong>Oops!</strong>
+          <h6 className="invalid">{this.props.errorMessage}</h6>
+        </div>
+      )
+    }
+  }
+
   renderField(field){
   return(
     <div className="form-group">
       <label>{field.label}</label>
       <input
         className="form-control"
-        type="text"
+        type={field.type}
         {...field.input}
       />
       <div className="invalid">
@@ -38,16 +49,20 @@ class SignIn extends Component{
           <Field
               label="Email"
               name="email"
+              type="text"
               component={this.renderField}
             />
             <Field
                 label="Password"
                 name="password"
+                type="password"
                 component={this.renderField}
               />
-          <button action='submit' className="btn btn-primary">Sign In  <i className="fas fa-sign-in-alt"></i>
-
-</button>
+            {this.renderAlert()}
+          <button action='submit' className="btn btn-primary">
+            Sign In
+            <i className="fas fa-sign-in-alt"></i>
+          </button>
         </form>
       </div>
     )
@@ -69,9 +84,13 @@ function validate(values){
   return errors;
 }
 
+function mapStateToProps(state){
+  return {errorMessage: state.auth.error};
+}
+
 export default reduxForm({
   validate,
   form: 'signin',
 })(
-  connect(null, actions)(SignIn)
+  connect(mapStateToProps, actions)(SignIn)
 );
