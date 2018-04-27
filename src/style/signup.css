@@ -1,0 +1,15 @@
+.invalid{
+  color:red;
+}
+
+.sign-up-form{
+  margin-top:50px;
+}
+
+.sign-up-form h4{
+  text-align: center;
+}
+
+.error-message{
+  text-align:center;
+}

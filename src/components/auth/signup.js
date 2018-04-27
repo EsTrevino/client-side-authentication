@@ -3,10 +3,9 @@ import { Field, reduxForm } from 'redux-form';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
-import '../../style/signin.css';
+import '../../style/signup.css';
 
-class SignIn extends Component{
-
+class SignUp extends Component {
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -34,32 +33,41 @@ class SignIn extends Component{
   );
 }
 
-  handleFormSubmit({email, password}){
-    this.props.signInUser({email, password});
-  }
+
+handleFormSubmit({email, password}){
+  this.props.signUpUser({email, password});
+}
 
   render(){
+    console.log(this.props);
     const {handleSubmit} = this.props;
-
-    return (
-      <div className="container sign-in-form jumbotron">
-        <h4>Sign In</h4>
+    return(
+      <div className="container sign-up-form jumbotron">
+        <h4>Sign Up</h4>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <Field
-              label="Email"
+              label="Please enter an email for you account"
               name="email"
               type="text"
               component={this.renderField}
             />
+          <Field
+              label="Please enter a password for your account"
+              name="password"
+              type="password"
+              component={this.renderField}
+            />
+
             <Field
-                label="Password"
-                name="password"
-                type="password"
-                component={this.renderField}
-              />
+              label="Please confirm your password"
+              name="passwordConfirm"
+              type="password"
+              component={this.renderField}
+            />
+
             {this.renderAlert()}
-          <button action='submit' className="btn btn-primary">
-            Sign In   <i className="fas fa-sign-in-alt"></i>
+          <button action='submit' className="btn btn-success">
+            Sign Up   <i className="fas fa-user-plus"></i>
           </button>
         </form>
       </div>
@@ -74,21 +82,29 @@ function validate(values){
   //if errors has any properties, redux forms assumes
   //it is invalid
   if(!values.email){
-    errors.email="Please enter an email";
+    errors.email="Please enter an email to sign up";
   }
   if(!values.password){
-    errors.password="Please enter a password";
+    errors.password="Please enter a password to sign up";
+  }
+  if(!values.passwordConfirm){
+    errors.passwordConfirm="Please confirm your password";
+  }
+  if(values.password !== values.passwordConfirm){
+    errors.passwordConfirm="Passwords must match";
   }
   return errors;
 }
 
 function mapStateToProps(state){
-  return {errorMessage: state.auth.error};
+  return {
+    errorMessage: state.auth.error
+  };
 }
 
 export default reduxForm({
   validate,
-  form: 'signin',
+  form: 'signup'
 })(
-  connect(mapStateToProps, actions)(SignIn)
+  connect(mapStateToProps, actions)(SignUp)
 );

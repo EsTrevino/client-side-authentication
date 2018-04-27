@@ -4,7 +4,7 @@ class Feature extends Component {
   render(){
     return(
       <div>
-        feature
+        this is a protected feature. User must be authenticated to see this.
       </div>
     )
   }
