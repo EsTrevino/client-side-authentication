@@ -39,27 +39,26 @@ handleFormSubmit({email, password}){
 }
 
   render(){
-    console.log(this.props);
     const {handleSubmit} = this.props;
     return(
       <div className="container sign-up-form jumbotron">
         <h4>Sign Up</h4>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <Field
-              label="Please enter an email for you account"
+              label="Add an Email"
               name="email"
               type="text"
               component={this.renderField}
             />
           <Field
-              label="Please enter a password for your account"
+              label="Add a Password"
               name="password"
               type="password"
               component={this.renderField}
             />
 
             <Field
-              label="Please confirm your password"
+              label="Confirm your password"
               name="passwordConfirm"
               type="password"
               component={this.renderField}
