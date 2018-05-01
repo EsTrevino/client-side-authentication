@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, getFormMeta } from 'redux-form';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
@@ -39,6 +39,7 @@ handleFormSubmit({email, password}){
 }
 
   render(){
+    console.log(getFormMeta('signup'));
     const {handleSubmit} = this.props;
     return(
       <div className="container sign-up-form jumbotron">
@@ -56,7 +57,7 @@ handleFormSubmit({email, password}){
               type="password"
               component={this.renderField}
             />
-
+            {console.log(this.props)}
             <Field
               label="Confirm your password"
               name="passwordConfirm"

@@ -33,7 +33,6 @@ class Header extends Component{
             <Link to="/" className="nav-link">Redux Authentication</Link>
           </li>
           {this.renderLinks()}
-
         </ul>
       </div>
     )
